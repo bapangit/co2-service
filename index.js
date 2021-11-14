@@ -3,7 +3,7 @@ var app = express();
 const port = process.env.PORT || 8080
 
 app.get('/', function (req, res) {
-   res.send('Hello World, Good Evening !');
+   res.send('Good Evening !');
 })
 
 var server = app.listen(port, function () {
