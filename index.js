@@ -1,10 +1,14 @@
-const http = require('http');
+var express = require('express');
+var app = express();
+const port = process.env.PORT || 8080
 
-const port = process.env.PORT || 3000
-const requestListener = function (req, res) {
-  res.writeHead(200);
-  res.end('Good Evening, All Friends!');
-}
+app.get('/', function (req, res) {
+   res.send('Hello World');
+})
 
-const server = http.createServer(requestListener);
-server.listen(port);
+var server = app.listen(port, function () {
+   var host = server.address().address
+   var port = server.address().port
+   
+   console.log("Example app listening at http://%s:%s", host, port)
+})
