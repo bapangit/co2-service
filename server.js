@@ -10,7 +10,6 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-const prt = process.env.PORT
 
 require('./db/dbcon')
 
@@ -22,7 +21,7 @@ app.get('/', function (req, res) {
 })
 
 //server
-const port = prt || 8080
+const port = process.env.PORT || 8080
 
 var server = app.listen(port, function () {
    var host = server.address().address
