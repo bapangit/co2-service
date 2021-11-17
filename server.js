@@ -18,7 +18,7 @@ require('./db/dbcon')
 app.use("/",require('./routes/auth'))
 
 app.get('/', function (req, res) {
-   res.send('Good Morning !');
+   res.send('Good Morning All !');
 })
 
 //server
