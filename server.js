@@ -1,8 +1,9 @@
 require('dotenv').config()
 var express = require('express');
 var app = express();
+require('./db/dbcon')
 
-var cors = require('cors')
+var cors = require('cors');
 app.use(cors())
 
 app.use(express.json());
@@ -10,15 +11,18 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-
-require('./db/dbcon')
-
 //routes
+app.get('/', function (req, res) {
+   res.send("Good Evening !")
+})
+app.post('/greet', function (req, res) {
+   res.send("Have a Nice Day !")
+})
+//auth routes
 app.use("/",require('./routes/auth'))
 
-app.get('/', function (req, res) {
-   res.send('Good Morning All !');
-})
+//api routes
+app.use("/",require('./routes/api'))
 
 //server
 const port = process.env.PORT || 8080
