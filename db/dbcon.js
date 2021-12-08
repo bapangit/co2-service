@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://127.0.0.1:27017/photodb', { useUnifiedTopology: true, useNewUrlParser: true })
-    .then(
-        () => {
-
-        },
-        () => {
-            console.log("could not connect to database")
-        }
-    );
+mongoose.connect(process.env.ATLAS_DB_URL).then(
+    res => {},
+    err => {console.log(err)}
+)

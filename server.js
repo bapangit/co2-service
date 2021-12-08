@@ -1,7 +1,10 @@
 require('dotenv').config()
 var express = require('express');
+const mongoose = require('mongoose')
 var app = express();
 require('./db/dbcon')
+const router = express.Router()
+router.use(express.static(__dirname+"./public/"))
 
 var cors = require('cors');
 app.use(cors())
@@ -11,12 +14,14 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+
 //routes
 app.get('/', function (req, res) {
    res.send("Good Evening !")
 })
 app.post('/greet', function (req, res) {
-   res.send("Have a Nice Day !")
+   var s = new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
+   res.send("Have a Nice Day ! "+s)
 })
 //auth routes
 app.use("/",require('./routes/auth'))
