@@ -17,7 +17,7 @@ app.use(express.urlencoded({
 
 //routes
 app.get('/', function (req, res) {
-   res.send("Good Evening !")
+   res.send("Welcome !")
 })
 app.post('/greet', function (req, res) {
    var s = new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
