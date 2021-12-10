@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
 })
 app.post('/greet', function (req, res) {
    var s = new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
-   res.send("Have a Nice Day ! "+s)
+   res.send("Good morning ! "+s)
 })
 //auth routes
 app.use("/",require('./routes/auth'))
