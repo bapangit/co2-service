@@ -6,48 +6,53 @@ var jwt = require('jsonwebtoken');
 exports.googleLogin = (req, res) => {
     const { tokenId } = req.body
     client.verifyIdToken({ idToken: tokenId, audience: "750954656780-ake4tf418u0l4in49c0cs58f7aotu6fu.apps.googleusercontent.com" }).then(
-            response => {
+        response => {
             const { email_verified, email, name } = response.payload
-            if (email_verified) {
-                User.findOne({ email: email }).then(
-                    result => {
-                        var accessToken = jwt.sign({ email: email }, process.env.SECRET_KEY, { expiresIn: '15s' });
-                        var refreshToken = jwt.sign({ email: email }, process.env.SECRET_KEY, { expiresIn: '1y' });
-                        var sendTokens = res => {
-                            res.status(200).json({accessToken,refreshToken,email})
-                        }
-
-                        if (result) {
-                            User.findByIdAndUpdate(result._id, { accessToken: accessToken, refreshTokens: [refreshToken, "empty"] }).then(
-                                data => {
-                                    sendTokens(res)
-                                },
-                                err => {
-                                    res.status(401).json({error:"Could not login !"})
-                                }
-                            )
-                        } else {
-
-                            new User({ name: name, email: email, accessToken: accessToken, refreshTokens: [refreshToken, "empty"] }).save().then(
-                                data => {
-                                    sendTokens(res)
-                                },
-                                err => {
-                                    res.status(401).json({error:"Could not create user !"})
-                                }
-                            )
-                        }
-
-                    },
-                    err => {
-                        res.status(401).json({error:"could not find user !"})
+            User.findOne({ email: email }).then(
+                result => {
+                    var accessToken = jwt.sign({ email: email }, process.env.SECRET_KEY, { expiresIn: '120s' });
+                    var refreshToken = jwt.sign({ email: email }, process.env.SECRET_KEY, { expiresIn: '24h' });
+                    var sendTokens = res => {
+                        res.status(200).json({ accessToken, refreshToken, email })
                     }
-                )
-            } else {
-                res.send("error")
-            }
+
+                    if (result) {
+                        User.findByIdAndUpdate(result._id, { accessToken: accessToken, refreshTokens: [refreshToken, "empty","empty","empty"] }).then(
+                            data => {
+                                if (data) {
+                                    sendTokens(res)
+                                } else {
+                                    res.status(500).json({ error: "Couldn't find user !" })
+                                }
+                            },
+                            err => {
+                                res.status(500).json({ error: "Couldn't find user !" })
+                            }
+                        )
+                    } else {
+
+                        new User({ name: name, email: email, accessToken: accessToken, refreshTokens: [refreshToken, "empty","empty","empty"] }).save().then(
+                            data => {
+                                if (data) {
+                                    sendTokens(res)
+                                } else {
+                                    res.status(500).json({ error: "Couldn't create user !" })
+                                }
+                            },
+                            err => {
+                                res.status(500).json({ error: "Couldn't create user !" })
+                            }
+                        )
+                    }
+
+                },
+                err => {
+                    res.status(500).json({ error: "Internal server error !" })
+                }
+            )
+
         })
         .catch(err => {
-            res.status(401).json({error:"Google authentication failed !"})
+            res.status(500).json({ error: "Internal server error !" })
         })
 }

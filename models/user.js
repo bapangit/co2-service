@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
         , unique: true
     }
     , accessToken: String
-    ,refreshTokens:[String,String]
+    ,refreshTokens:[String,String,String,String]
 })
 
 const User = mongoose.model("user", userSchema);
