@@ -10,7 +10,8 @@ const {myPhotos} = require('../controlers/apis/myPhotos')
  middlewares
   */
 const { isAuthorized } = require("../middlewares/auth.js")
-const {uploadImageMiddleware} = require("../utils/uploadimage")
+const {uploadImageMiddleware} = require("../utils/uploadimage");
+const { deletePhoto } = require('../controlers/apis/deletePhoto');
 /* 
 non authorized routes
  */
@@ -20,5 +21,6 @@ authorized routes
  */
 router.post("/uploadimage", isAuthorized, uploadImageMiddleware, uploadImageController)
 router.post("/myphotos",isAuthorized,myPhotos)
+router.post("/deletephoto",isAuthorized,deletePhoto)
 
 module.exports = router
