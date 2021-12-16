@@ -7,7 +7,11 @@ const userSchema = mongoose.Schema({
         , unique: true
     }
     , accessToken: String
-    ,refreshTokens:[String,String,String,String]
+    , refreshTokens: [String, String, String, String]
+    , publicPhoto: {
+        type: String
+        , default: "null"
+    }
 })
 
 const User = mongoose.model("user", userSchema);

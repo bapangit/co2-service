@@ -7,7 +7,7 @@ exports.myPhotos = (req, res) => {
     Photo.find({ userId: _id })
     .sort({createdAt: -1})
     .skip(skipAmount*page)
-    .limit(4)
+    .limit(skipAmount)
     .then(
         data => { res.status(200).json(data) },
         err => {res.status(500).json({error:"Internal Server Error."})}
