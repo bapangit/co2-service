@@ -20,7 +20,6 @@ const {uploadImageMiddleware} = require("../utils/uploadimage");
 non authorized routes
  */
 router.post("/refresh", updateTokenController)
-router.get('/photostoday',photosToday)
 /* 
 authorized routes
  */
