@@ -1,6 +1,7 @@
 require('dotenv').config()
 var express = require('express');
 const mongoose = require('mongoose')
+const { photosToday } = require('./controlers/apis/photosToday');
 var app = express();
 require('./db/dbcon')
 const router = express.Router()
@@ -23,6 +24,7 @@ app.post('/greet', function (req, res) {
    var s = new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
    res.send("Good morning ! "+s)
 })
+app.get('/photostoday',photosToday)
 //auth routes
 app.use("/",require('./routes/auth'))
 
