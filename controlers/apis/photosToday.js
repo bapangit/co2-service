@@ -1,7 +1,7 @@
 const { Photo } = require("../../models/photo")
 const skipAmount = 4
 exports.photosToday = (req, res) => {
-    const page = 0
+    const page = req.query.page
     Photo.find({ published: true })
         .sort({ createdAt: -1 })
         .skip(skipAmount * page)

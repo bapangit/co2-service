@@ -3,7 +3,6 @@ const cloudinary = require("../../utils/cloudinary")
  models 
  */
  const { Photo } = require("../../models/photo")
- const { User } = require("../../models/user")
 exports.uploadImageController = async (req,res) => {
     const {user,file} = req
     const {secure_url,public_id} = await cloudinary.uploader.upload(file.path)
