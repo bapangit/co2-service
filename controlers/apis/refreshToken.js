@@ -15,7 +15,7 @@ var matchRefreshToken = (arr, oldToken, newToken) => {
     }
     return newArr
 }
-exports.updateTokenController = (req, res) => {
+exports.refreshTokenController = (req, res) => {
     try{
         const {email} = jwt.verify(req.body.refreshToken, process.env.SECRET_KEY)
         User.findOne({ email: email }).then(

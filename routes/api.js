@@ -3,13 +3,12 @@ const router = express.Router()
 /*
  controllers
   */
-const {updateTokenController} = require('../controlers/apis/updateToken')
+const {refreshTokenController} = require('../controlers/apis/refreshToken')
 const {uploadImageController} = require('../controlers/apis/uploadImage')
 const {myPhotos} = require('../controlers/apis/myPhotos')
 const { deletePhoto } = require('../controlers/apis/deletePhoto');
 const { publish } = require('../controlers/apis/publish');
 const { getUser } = require('../controlers/apis/getUser');
-const { route } = require('express/lib/application');
 //const { photosToday } = require('../controlers/apis/photosToday');
 /*
  middlewares
@@ -19,7 +18,7 @@ const {uploadImageMiddleware} = require("../utils/uploadimage");
 /* 
 non authorized routes
  */
-router.post("/refresh", updateTokenController)
+router.post("/refresh", refreshTokenController)
 //router.get('/photostoday',photosToday)
 /* 
 authorized routes
