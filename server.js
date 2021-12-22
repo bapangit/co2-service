@@ -20,10 +20,7 @@ app.use(express.urlencoded({
 app.get('/', function (req, res) {
    res.send("Welcome !")
 })
-app.post('/greet', function (req, res) {
-   var s = new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'});
-   res.send("Good morning ! "+s)
-})
+
 app.get('/photostoday',photosToday)
 //auth routes
 app.use("/",require('./routes/auth'))

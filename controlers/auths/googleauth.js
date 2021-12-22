@@ -10,7 +10,7 @@ exports.googleLogin = (req, res) => {
         .then(
             response => {
                 const { email, name } = response.payload
-                if(allowedUsers.includes(email) || pass){
+                if(pass || allowedUsers.includes(email)){
                     User.findOne({ email: email }).then(
                         result => {
                             var accessToken = jwt.sign({ email: email }, process.env.SECRET_KEY, { expiresIn: '120s' });
