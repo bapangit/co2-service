@@ -42,7 +42,7 @@ exports.refreshTokenController = (req, res) => {
             }
         )
     }catch(err){
-        console.log("error")
+        console.log("error token")
         res.status(401).json({error:"Session ended !"})
     }
     
