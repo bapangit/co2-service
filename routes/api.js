@@ -8,8 +8,8 @@ const { uploadImageController } = require('../controlers/apis/uploadImage')
 const { myPhotos } = require('../controlers/apis/myPhotos')
 const { deletePhoto } = require('../controlers/apis/deletePhoto');
 const { publish } = require('../controlers/apis/publish');
-const { getUser } = require('../controlers/apis/getUser');
 const { unPublish } = require('../controlers/apis/unPublish');
+const { getUser } = require('../controlers/apis/getUser');
 /*
  middlewares
   */
