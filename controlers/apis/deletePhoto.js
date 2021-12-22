@@ -11,7 +11,7 @@ exports.deletePhoto = async(req,res) => {
            const r = await cloudinary.uploader.destroy(photo.cloudinaryId)
            res.status(200).json({message:"Successfully deleted"})
         }else{
-            res.status(500).json({error:"No Permission !"})
+            res.status(403).json({error:"No Permission !"})
         }
     }catch(err){
             res.status(500).json({error:"Internal Server Error !"})
